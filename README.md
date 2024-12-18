@@ -7,3 +7,8 @@ pip install --upgrade pip
 ``` bash
 pip install -r requirements.txt
 ```
+
+### Launch app
+```bash
+python main.py
+```
