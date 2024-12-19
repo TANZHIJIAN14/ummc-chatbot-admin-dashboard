@@ -10,10 +10,12 @@ def upload_pdf(file, state):
     try:
         upload_file(file)
         state.append(file)
-        return state, state
+        gr.Info('Successfully uploaded file', duration=3)
+        return None, state, state
     except Exception as e:
         print(f"Error: {e}")
-        return file, state
+        gr.Error('Failed to upload file', duration=3)
+        return file, None, state
 
 def update_dashboard(state):
     print("Upload on change")
@@ -22,14 +24,17 @@ def update_dashboard(state):
     return state
 
 def delete(file, state):
+    print(f"Delete:  {file}")
     uploaded_file = get_file_by_gradio_file_path(file)
     uploaded_file_id = str(uploaded_file["_id"])
 
     try:
         delete_file(uploaded_file_id)
         state = get_files()
+        gr.Info('Successfully delete file', duration=3)
         return state
     except Exception as e:
+        gr.Error('Failed to delete file', duration=3)
         return file
 
 # Gradio Interface
@@ -52,7 +57,7 @@ with gr.Blocks() as app:
     process_button.click(
         upload_pdf,
         inputs=[pdf_upload, uploaded_files_state],
-        outputs=[pdf_preview, uploaded_files_state],
+        outputs=[pdf_upload, pdf_preview, uploaded_files_state],
     )
 
     # Update the dashboard display whenever the state changes
