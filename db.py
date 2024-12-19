@@ -31,6 +31,17 @@ def get_files():
     else:
         raise Exception("Failed to get files")
 
+def get_file_by_gradio_file_path(gradio_file_path):
+    url = f"{BACKEND_URL}/upload/file/gradio_file_path"
+    param = {"gradio_file_path": gradio_file_path}
+    response = requests.get(url, params=param)
+
+    # Check the response status
+    if response.status_code == HTTPStatus.OK.value:
+        return response.json()
+    else:
+        raise Exception(f"Failed to get file with given gradio file path: {gradio_file_path}")
+
 def upload_file(file_path):
     url = f"{BACKEND_URL}/upload/file/pdf"
     params = {
@@ -49,3 +60,14 @@ def upload_file(file_path):
         return response.json()
     else:
         raise Exception(f"Failed to upload file: {response.json()}")
+
+def delete_file(file_id):
+    if not file_id:
+        raise Exception("File id is required")
+
+    url = f"{BACKEND_URL}/upload/file/pdf"
+    param = {"file_id": file_id}
+    response = requests.delete(url, params=param)
+
+    if response.status_code != HTTPStatus.OK.value:
+        raise Exception("Failed to delete file")

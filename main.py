@@ -1,5 +1,6 @@
 import gradio as gr
-from db import upload_file, get_files
+from db import upload_file, get_files, get_file_by_gradio_file_path, delete_file
+
 
 def app_load(state):
     state = get_files()
@@ -14,12 +15,22 @@ def upload_pdf(file, state):
         print(f"Error: {e}")
         return file, state
 
-
 def update_dashboard(state):
     print("Upload on change")
     uploaded_files = get_files()
     state = uploaded_files
     return state
+
+def delete(file, state):
+    uploaded_file = get_file_by_gradio_file_path(file)
+    uploaded_file_id = str(uploaded_file["_id"])
+
+    try:
+        delete_file(uploaded_file_id)
+        state = get_files()
+        return state
+    except Exception as e:
+        return file
 
 # Gradio Interface
 with gr.Blocks() as app:
@@ -49,6 +60,13 @@ with gr.Blocks() as app:
         update_dashboard,
         inputs=[uploaded_files_state],
         outputs=[pdf_preview],
+    )
+
+    # Delete file in file preview
+    pdf_preview.delete(
+        delete,
+        inputs=[pdf_preview, uploaded_files_state],
+        outputs=[pdf_preview]
     )
 
     app.load(app_load, inputs=uploaded_files_state, outputs=pdf_preview)
