@@ -10,7 +10,6 @@ def upload_pdf(file, state):
     try:
         upload_file(file)
         state.append(file)
-        gr.Info('Successfully uploaded file', duration=3)
         return None, state, state
     except Exception as e:
         print(f"Error: {e}")
@@ -21,6 +20,7 @@ def update_dashboard(state):
     print("Upload on change")
     uploaded_files = get_files()
     state = uploaded_files
+    gr.Info('Successfully uploaded file', duration=3)
     return state
 
 def delete(file, state):
@@ -77,4 +77,5 @@ with gr.Blocks() as app:
     app.load(app_load, inputs=uploaded_files_state, outputs=pdf_preview)
 
 # Launch the app
-app.launch()
+app.launch(auth=("", ""))
+# app.launch(share=True, auth=("", ""))
