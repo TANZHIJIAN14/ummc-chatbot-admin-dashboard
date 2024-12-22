@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6af0b463-96f0-4b13-90ca-abc837cde6a9" name="Changes" comment="Implement delete file function">
+    <list default="true" id="6af0b463-96f0-4b13-90ca-abc837cde6a9" name="Changes" comment="Minor change">
+      <change afterPath="$PROJECT_DIR$/css.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/feedbackDb.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/fileDb.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,13 +99,31 @@
       <option name="project" value="LOCAL" />
       <updated>1734620070254</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Enhance UI handling">
+      <option name="closed" value="true" />
+      <created>1734621032748</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1734621032748</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Minor change">
+      <option name="closed" value="true" />
+      <created>1734625392267</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1734625392267</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add gitignore" />
     <MESSAGE value="Implement admin dashboard" />
     <MESSAGE value="Implement delete file function" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement delete file function" />
+    <MESSAGE value="Enhance UI handling" />
+    <MESSAGE value="Minor change" />
+    <option name="LAST_COMMIT_MESSAGE" value="Minor change" />
   </component>
 </project>

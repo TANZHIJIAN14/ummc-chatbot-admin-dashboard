@@ -1,11 +1,16 @@
 import gradio as gr
-from db import upload_file, get_files, get_file_by_gradio_file_path, delete_file
+import pandas
 
+from css import custom_css
+from feedbackDb import get_feedback
+from fileDb import upload_file, get_files, get_file_by_gradio_file_path, delete_file
 
-def app_load(state):
-    state = get_files()
-    return state
+def app_load(files_state, feedback_state):
+    files_state = get_files()
+    feedback_state = get_all_feedback()
+    return files_state, feedback_state
 
+# File Management ---------------
 def upload_pdf(file, state):
     try:
         upload_file(file)
@@ -37,22 +42,48 @@ def delete(file, state):
         gr.Error('Failed to delete file', duration=3)
         return file
 
+# Feedback Management ---------------
+def get_all_feedback():
+    try:
+        dataset = get_feedback()
+        return pandas.DataFrame(dataset)
+    except Exception as e:
+        gr.Error('Failed to get feedback', duration=3)
+
 # Gradio Interface
-with gr.Blocks() as app:
+with gr.Blocks(css=custom_css) as app:
     uploaded_files_state = gr.State(value=[])  # State to track uploaded files
+    get_feedback_state = gr.State(value=[])
 
-    with gr.Row():
-        # Upload column
-        with gr.Column(scale=1):
-            gr.Markdown("## Upload a PDF File")
-            pdf_upload = gr.File(label="Upload your PDF", file_types=[".pdf"])
-            process_button = gr.Button("Upload")
+    with gr.Tab("File Management"):
+        with gr.Row():
+            # Upload column
+            with gr.Column(scale=1):
+                # gr.Markdown("## Upload a PDF File")
+                pdf_upload = gr.File(label="Upload your PDF", file_types=[".pdf"])
+                process_button = gr.Button("Upload")
 
-        # Dashboard column
-        with gr.Column(scale=2):
-            gr.Markdown("## Dashboard")
-            pdf_preview = gr.Files(label="Uploaded PDF")
+            # Dashboard column
+            with gr.Column(scale=2):
+                # gr.Markdown("## Dashboard")
+                pdf_preview = gr.Files(label="Uploaded PDF")
 
+    with gr.Tab("Feedback"):
+        gr.Markdown("## Dashboard")
+
+        table_view = gr.DataFrame(
+            value=get_feedback_state.value,
+            headers=["_id", "user_id", "message", "created_at"],  # Column headers
+            datatype=["str", "str", "str", "str"],
+            elem_id="dataframe-container"
+        )
+
+    # App loading state
+    app.load(app_load,
+             inputs=[uploaded_files_state, get_feedback_state],
+             outputs=[pdf_preview, table_view])
+
+    # File Management Function-----------
     # Process uploaded file and update dashboard
     process_button.click(
         upload_pdf,
@@ -73,8 +104,6 @@ with gr.Blocks() as app:
         inputs=[pdf_preview, uploaded_files_state],
         outputs=[pdf_preview]
     )
-
-    app.load(app_load, inputs=uploaded_files_state, outputs=pdf_preview)
 
 # Launch the app
 app.launch(auth=("", ""))
