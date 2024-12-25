@@ -3,7 +3,8 @@ import pandas
 
 from css import custom_css
 from feedbackDb import get_feedback
-from fileDb import upload_file, get_files, get_file_by_gradio_file_path, delete_file
+from fileDb import get_files, get_file_by_gradio_file_path, delete_file, upload_files
+
 
 def app_load(files_state, feedback_state):
     files_state = get_files()
@@ -11,15 +12,15 @@ def app_load(files_state, feedback_state):
     return files_state, feedback_state
 
 # File Management ---------------
-def upload_pdf(file, state):
+def upload_pdfs(file, state):
     try:
-        upload_file(file)
-        state.append(file)
+        upload_files(file)
+        state.extend(file)
         return None, state, state
     except Exception as e:
         print(f"Error: {e}")
         gr.Error('Failed to upload file', duration=3)
-        return file, None, state
+        return file, state, state
 
 def update_dashboard(state):
     print("Upload on change")
@@ -60,7 +61,7 @@ with gr.Blocks(css=custom_css) as app:
             # Upload column
             with gr.Column(scale=1):
                 # gr.Markdown("## Upload a PDF File")
-                pdf_upload = gr.File(label="Upload your PDF", file_types=[".pdf"])
+                pdf_upload = gr.File(label="Upload your PDF", file_types=[".pdf"], file_count="multiple")
                 process_button = gr.Button("Upload")
 
             # Dashboard column
@@ -86,7 +87,7 @@ with gr.Blocks(css=custom_css) as app:
     # File Management Function-----------
     # Process uploaded file and update dashboard
     process_button.click(
-        upload_pdf,
+        upload_pdfs,
         inputs=[pdf_upload, uploaded_files_state],
         outputs=[pdf_upload, pdf_preview, uploaded_files_state],
     )

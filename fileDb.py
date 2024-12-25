@@ -29,24 +29,26 @@ def get_file_by_gradio_file_path(gradio_file_path):
     else:
         raise Exception(f"Failed to get file with given gradio file path: {gradio_file_path}")
 
-def upload_file(file_path):
+def upload_files(file_paths):
     url = f"{BACKEND_URL}/upload/file/pdf"
-    params = {
-        "gradio_file_path": file_path
-    }
 
-    # Open the file in binary mode and prepare the payload
-    with open(file_path, 'rb') as file:
-        files = {'file': (file_path, file, 'application/pdf')}
+    file_list = [
+        ('files', (file_path, open(file_path, 'rb'), 'application/pdf'))
+        for file_path in file_paths
+    ]
 
-        # Send the POST request
-        response = requests.post(url, files=files, params=params)
+    # Send the POST request
+    response = requests.post(url, files=file_list)
+
+    # Close all opened files
+    for _, (filename, file_obj, _) in file_list:
+        file_obj.close()
 
     # Check the response status
     if response.status_code == HTTPStatus.OK.value:
         return response.json()
     else:
-        raise Exception(f"Failed to upload file: {response.json()}")
+        raise Exception(f"Failed to upload files: {response.json()}")
 
 def delete_file(file_id):
     if not file_id:
