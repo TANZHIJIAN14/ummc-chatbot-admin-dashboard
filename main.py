@@ -29,19 +29,18 @@ def update_dashboard(state):
     gr.Info('Successfully uploaded file', duration=3)
     return state
 
-def delete(file, state):
-    print(f"Delete:  {file}")
-    uploaded_file = get_file_by_gradio_file_path(file)
-    uploaded_file_id = str(uploaded_file["_id"])
-
+def delete(deleted_file: gr.DeletedFileData, state):
     try:
+        uploaded_file = get_file_by_gradio_file_path(deleted_file.file.path)
+        uploaded_file_id = str(uploaded_file["_id"])
+
         delete_file(uploaded_file_id)
         state = get_files()
         gr.Info('Successfully delete file', duration=3)
         return state
     except Exception as e:
         gr.Error('Failed to delete file', duration=3)
-        return file
+        return deleted_file.file.path
 
 # Feedback Management ---------------
 def get_all_feedback():
@@ -60,14 +59,12 @@ with gr.Blocks(css=custom_css) as app:
         with gr.Row():
             # Upload column
             with gr.Column(scale=1):
-                # gr.Markdown("## Upload a PDF File")
                 pdf_upload = gr.File(label="Upload your PDF", file_types=[".pdf"], file_count="multiple")
                 process_button = gr.Button("Upload")
 
             # Dashboard column
             with gr.Column(scale=2):
-                # gr.Markdown("## Dashboard")
-                pdf_preview = gr.Files(label="Uploaded PDF")
+                pdf_preview = gr.Files(label="Uploaded PDF", interactive=True)
 
     with gr.Tab("Feedback"):
         gr.Markdown("## Dashboard")
@@ -102,10 +99,10 @@ with gr.Blocks(css=custom_css) as app:
     # Delete file in file preview
     pdf_preview.delete(
         delete,
-        inputs=[pdf_preview, uploaded_files_state],
+        [uploaded_files_state],
         outputs=[pdf_preview]
     )
 
 # Launch the app
-app.launch(auth=("", ""))
+app.launch()
 # app.launch(share=True, auth=("", ""))
