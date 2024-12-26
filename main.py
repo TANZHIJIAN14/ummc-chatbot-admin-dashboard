@@ -56,18 +56,18 @@ def upload_pdfs(file, state):
 #     gr.Info('Successfully uploaded file', duration=3)
 #     return state
 
-def delete(deleted_file: gr.DeletedFileData, state):
+def delete(deleted_file: gr.DeletedFileData, file_state):
     try:
         uploaded_file = get_file_by_gradio_file_path(deleted_file.file.path)
         uploaded_file_id = str(uploaded_file["_id"])
 
         delete_file(uploaded_file_id)
-        state = get_files()
+        file_state = get_files()
         gr.Info('Successfully delete file', duration=3)
-        return state
+        return file_state, file_state
     except Exception as e:
         gr.Error('Failed to delete file', duration=3)
-        return deleted_file.file.path
+        return deleted_file.file.path, file_state
 
 # Feedback Management ---------------
 def get_all_feedback():
@@ -133,7 +133,7 @@ with gr.Blocks(css=custom_css) as app:
     pdf_preview.delete(
         delete,
         [uploaded_files_state],
-        outputs=[pdf_preview]
+        outputs=[pdf_preview, uploaded_files_state]
     )
 
 # Launch the app
