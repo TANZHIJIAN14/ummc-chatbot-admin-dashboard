@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6af0b463-96f0-4b13-90ca-abc837cde6a9" name="Changes" comment="Implement feedback tab" />
+    <list default="true" id="6af0b463-96f0-4b13-90ca-abc837cde6a9" name="Changes" comment="Enhance UI bug handling">
+      <change afterPath="$PROJECT_DIR$/uploadUrlDb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,34 +16,34 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "TANZHIJIAN14"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;TANZHIJIAN14&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "git@github.com:TANZHIJIAN14/ummc-chatbot-admin-dashboard.git",
-    "accountId": "25f6aca2-3c93-46d7-8e4b-a08d19fc76e9"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:TANZHIJIAN14/ummc-chatbot-admin-dashboard.git&quot;,
+    &quot;accountId&quot;: &quot;25f6aca2-3c93-46d7-8e4b-a08d19fc76e9&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2qOOnkehqw6fgfNYjNadnNX56V4" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/jaytan/Documents/UM/YR4_SEM1/FYP_2/ummc-chatbot-admin dashboard"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/jaytan/Documents/UM/YR4_SEM1/FYP_2/ummc-chatbot-admin dashboard&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -116,7 +119,31 @@
       <option name="project" value="LOCAL" />
       <updated>1734861705977</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Implement bucl upload files">
+      <option name="closed" value="true" />
+      <created>1735120403964</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1735120403964</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Fix delete file bug">
+      <option name="closed" value="true" />
+      <created>1735132249048</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1735132249048</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Enhance UI bug handling">
+      <option name="closed" value="true" />
+      <created>1735222749732</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1735222749732</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -126,6 +153,9 @@
     <MESSAGE value="Enhance UI handling" />
     <MESSAGE value="Minor change" />
     <MESSAGE value="Implement feedback tab" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement feedback tab" />
+    <MESSAGE value="Implement bucl upload files" />
+    <MESSAGE value="Fix delete file bug" />
+    <MESSAGE value="Enhance UI bug handling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Enhance UI bug handling" />
   </component>
 </project>

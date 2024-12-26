@@ -1,9 +1,11 @@
 import gradio as gr
 import pandas
+from gradio_client import Client, handle_file
 
 from css import custom_css
 from feedbackDb import get_feedback
 from fileDb import get_files, get_file_by_gradio_file_path, delete_file, upload_files
+from uploadUrlDb import upload_url_as_pdf, get_url_as_pdf
 
 
 def app_load():
@@ -13,17 +15,29 @@ def app_load():
 
 # File Management ---------------
 def upload_url(name, url):
-    if not name.strip():
-        gr.Warning("Name cannot be empty.", duration=3)
-    if not url.strip():
-        gr.Warning("URL cannot be empty.", duration=3)
+    try:
+        if not name.strip():
+            gr.Warning("Name cannot be empty.", duration=3)
+        if not url.strip():
+            gr.Warning("URL cannot be empty.", duration=3)
 
-    return name, url
+        resp = upload_url_as_pdf(url, name)
+        if not resp:
+            raise Exception
+
+        pdf_temp_file_path = get_url_as_pdf(resp['url'])
+        if not pdf_temp_file_path:
+            raise Exception
+
+        return None, None, [pdf_temp_file_path]
+    except Exception as e:
+        gr.Error('Failed to upload url as pdf', duration=3)
+        return name, url, None
 
 def upload_pdfs(file, state):
     try:
         if not file:
-            gr.Warning("Not file to be uploaded.", duration=3)
+            gr.Warning("No selected file to be uploaded.", duration=3)
             return file, state, state
 
         upload_files(file)
@@ -103,7 +117,10 @@ with gr.Blocks(css=custom_css) as app:
 
     # File Management Function-----------
     # Link the button to the function
-    submit_button.click(upload_url, inputs=[name_input, url_input], outputs=[name_input, url_input])
+    submit_button.click(
+        upload_url,
+        inputs=[name_input, url_input],
+        outputs=[name_input, url_input, pdf_upload])
 
     # Process uploaded file and update dashboard
     process_button.click(
