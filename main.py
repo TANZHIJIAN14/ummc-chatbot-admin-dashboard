@@ -6,28 +6,41 @@ from feedbackDb import get_feedback
 from fileDb import get_files, get_file_by_gradio_file_path, delete_file, upload_files
 
 
-def app_load(files_state, feedback_state):
+def app_load():
     files_state = get_files()
     feedback_state = get_all_feedback()
-    return files_state, feedback_state
+    return files_state, feedback_state, files_state, feedback_state
 
 # File Management ---------------
+def upload_url(name, url):
+    if not name.strip():
+        gr.Warning("Name cannot be empty.", duration=3)
+    if not url.strip():
+        gr.Warning("URL cannot be empty.", duration=3)
+
+    return name, url
+
 def upload_pdfs(file, state):
     try:
+        if not file:
+            gr.Warning("Not file to be uploaded.", duration=3)
+            return file, state, state
+
         upload_files(file)
         state.extend(file)
+        gr.Info('Successfully uploaded file', duration=3)
         return None, state, state
     except Exception as e:
         print(f"Error: {e}")
         gr.Error('Failed to upload file', duration=3)
         return file, state, state
 
-def update_dashboard(state):
-    print("Upload on change")
-    uploaded_files = get_files()
-    state = uploaded_files
-    gr.Info('Successfully uploaded file', duration=3)
-    return state
+# def update_dashboard(state):
+#     print("Upload on change")
+#     uploaded_files = get_files()
+#     state = uploaded_files
+#     gr.Info('Successfully uploaded file', duration=3)
+#     return state
 
 def delete(deleted_file: gr.DeletedFileData, state):
     try:
@@ -56,6 +69,13 @@ with gr.Blocks(css=custom_css) as app:
     get_feedback_state = gr.State(value=[])
 
     with gr.Tab("File Management"):
+        gr.Markdown("# Upload URL as PDF")
+        with gr.Column():
+            with gr.Row():
+                name_input = gr.Textbox(label="Name", placeholder="Enter your name")
+                url_input = gr.Textbox(label="URL", placeholder="Enter the URL")
+            with gr.Column():
+                submit_button = gr.Button("Upload")
         with gr.Row():
             # Upload column
             with gr.Column(scale=1):
@@ -78,22 +98,18 @@ with gr.Blocks(css=custom_css) as app:
 
     # App loading state
     app.load(app_load,
-             inputs=[uploaded_files_state, get_feedback_state],
-             outputs=[pdf_preview, table_view])
+             inputs=None,
+             outputs=[pdf_preview, table_view, uploaded_files_state, get_feedback_state])
 
     # File Management Function-----------
+    # Link the button to the function
+    submit_button.click(upload_url, inputs=[name_input, url_input], outputs=[name_input, url_input])
+
     # Process uploaded file and update dashboard
     process_button.click(
         upload_pdfs,
         inputs=[pdf_upload, uploaded_files_state],
         outputs=[pdf_upload, pdf_preview, uploaded_files_state],
-    )
-
-    # Update the dashboard display whenever the state changes
-    uploaded_files_state.change(
-        update_dashboard,
-        inputs=[uploaded_files_state],
-        outputs=[pdf_preview],
     )
 
     # Delete file in file preview
