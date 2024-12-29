@@ -1,7 +1,5 @@
 import gradio as gr
 import pandas
-from gradio_client import Client, handle_file
-
 from css import custom_css
 from feedbackDb import get_feedback
 from fileDb import get_files, get_file_by_gradio_file_path, delete_file, upload_files
