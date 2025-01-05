@@ -79,6 +79,8 @@ def get_all_feedback():
 
 # Gradio Interface
 with gr.Blocks(css=custom_css) as app:
+    app.title = "Admin dashboard"
+
     uploaded_files_state = gr.State(value=[])  # State to track uploaded files
     get_feedback_state = gr.State(value=[])
 
