@@ -16,8 +16,10 @@ def upload_url(name, url):
     try:
         if not name.strip():
             gr.Warning("Name cannot be empty.", duration=3)
+            return name, url, None
         if not url.strip():
             gr.Warning("URL cannot be empty.", duration=3)
+            return name, url, None
 
         resp = upload_url_as_pdf(url, name)
         if not resp:
