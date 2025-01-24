@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6af0b463-96f0-4b13-90ca-abc837cde6a9" name="Changes" comment="Enhance UI bug handling">
-      <change afterPath="$PROJECT_DIR$/uploadUrlDb.py" afterDir="false" />
+    <list default="true" id="6af0b463-96f0-4b13-90ca-abc837cde6a9" name="Changes" comment="Set gradio block title">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,13 +38,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/jaytan/Documents/UM/YR4_SEM1/FYP_2/ummc-chatbot-admin dashboard&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/jaytan/Documents/UM/YR4_SEM1/FYP_2/project/ummc-chatbot-admin dashboard"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -143,7 +144,55 @@
       <option name="project" value="LOCAL" />
       <updated>1735222749732</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Implement upload url as pdf">
+      <option name="closed" value="true" />
+      <created>1735228170390</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1735228170390</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Fix uploaded file state handling">
+      <option name="closed" value="true" />
+      <created>1735228520497</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1735228520497</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Minor change">
+      <option name="closed" value="true" />
+      <created>1735465911783</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1735465911783</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Minor change CSS">
+      <option name="closed" value="true" />
+      <created>1735482343465</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1735482343465</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Enhance empty value error handling">
+      <option name="closed" value="true" />
+      <created>1736072882609</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1736072882609</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Set gradio block title">
+      <option name="closed" value="true" />
+      <created>1736085389108</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1736085389108</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -151,11 +200,16 @@
     <MESSAGE value="Implement admin dashboard" />
     <MESSAGE value="Implement delete file function" />
     <MESSAGE value="Enhance UI handling" />
-    <MESSAGE value="Minor change" />
     <MESSAGE value="Implement feedback tab" />
     <MESSAGE value="Implement bucl upload files" />
     <MESSAGE value="Fix delete file bug" />
     <MESSAGE value="Enhance UI bug handling" />
-    <option name="LAST_COMMIT_MESSAGE" value="Enhance UI bug handling" />
+    <MESSAGE value="Implement upload url as pdf" />
+    <MESSAGE value="Fix uploaded file state handling" />
+    <MESSAGE value="Minor change" />
+    <MESSAGE value="Minor change CSS" />
+    <MESSAGE value="Enhance empty value error handling" />
+    <MESSAGE value="Set gradio block title" />
+    <option name="LAST_COMMIT_MESSAGE" value="Set gradio block title" />
   </component>
 </project>

@@ -7,9 +7,9 @@ from uploadUrlDb import upload_url_as_pdf, get_url_as_pdf
 
 
 def app_load():
-    files_state = get_files()
-    feedback_state = get_all_feedback()
-    return files_state, feedback_state, files_state, feedback_state
+    uploaded_files_state.value = get_files()
+    get_feedback_state.value = get_all_feedback()
+    return uploaded_files_state.value, get_feedback_state.value
 
 # File Management ---------------
 def upload_url(name, url):
@@ -34,20 +34,20 @@ def upload_url(name, url):
         gr.Error('Failed to upload url as pdf', duration=3)
         return name, url, None
 
-def upload_pdfs(file, state):
+def upload_pdfs(file):
     try:
         if not file:
             gr.Warning("No selected file to be uploaded.", duration=3)
-            return file, state, state
+            return file, uploaded_files_state.value, uploaded_files_state
 
         upload_files(file)
-        state.extend(file)
+        uploaded_files_state.value.extend(file)
         gr.Info('Successfully uploaded file', duration=3)
-        return None, state, state
+        return None, uploaded_files_state.value
     except Exception as e:
         print(f"Error: {e}")
         gr.Error('Failed to upload file', duration=3)
-        return file, state, state
+        return file, uploaded_files_state.value
 
 # def update_dashboard(state):
 #     print("Upload on change")
@@ -56,18 +56,18 @@ def upload_pdfs(file, state):
 #     gr.Info('Successfully uploaded file', duration=3)
 #     return state
 
-def delete(deleted_file: gr.DeletedFileData, file_state):
+def delete(deleted_file: gr.DeletedFileData):
     try:
         uploaded_file = get_file_by_gradio_file_path(deleted_file.file.path)
         uploaded_file_id = str(uploaded_file["_id"])
 
         delete_file(uploaded_file_id)
-        file_state = get_files()
+        uploaded_files_state.value = get_files()
         gr.Info('Successfully delete file', duration=3)
-        return file_state, file_state
+        return uploaded_files_state.value
     except Exception as e:
         gr.Error('Failed to delete file', duration=3)
-        return deleted_file.file.path, file_state
+        return uploaded_files_state.value
 
 # Feedback Management ---------------
 def get_all_feedback():
@@ -115,7 +115,7 @@ with gr.Blocks(css=custom_css) as app:
     # App loading state
     app.load(app_load,
              inputs=None,
-             outputs=[pdf_preview, table_view, uploaded_files_state, get_feedback_state])
+             outputs=[pdf_preview, table_view])
 
     # File Management Function-----------
     # Link the button to the function
@@ -127,17 +127,17 @@ with gr.Blocks(css=custom_css) as app:
     # Process uploaded file and update dashboard
     process_button.click(
         upload_pdfs,
-        inputs=[pdf_upload, uploaded_files_state],
-        outputs=[pdf_upload, pdf_preview, uploaded_files_state],
+        inputs=[pdf_upload],
+        outputs=[pdf_upload, pdf_preview],
     )
 
     # Delete file in file preview
     pdf_preview.delete(
         delete,
-        [uploaded_files_state],
-        outputs=[pdf_preview, uploaded_files_state]
+        None,
+        outputs=[pdf_preview]
     )
 
 # Launch the app
-app.launch()
-# app.launch(share=True, auth=("", ""))
+# app.launch()
+app.launch(share=True, auth=("test", "test"))
